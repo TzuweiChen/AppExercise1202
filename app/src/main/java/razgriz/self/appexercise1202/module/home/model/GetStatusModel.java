@@ -1,4 +1,4 @@
-package razgriz.self.appexercise1202.module.user.model;
+package razgriz.self.appexercise1202.module.home.model;
 
 import android.app.Application;
 

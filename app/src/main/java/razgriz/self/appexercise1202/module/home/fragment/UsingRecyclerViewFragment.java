@@ -1,4 +1,4 @@
-package razgriz.self.appexercise1202.module.user.fragment;
+package razgriz.self.appexercise1202.module.home.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import razgriz.self.appexercise1202.R;
-import razgriz.self.appexercise1202.module.user.model.GetStatusModel;
+import razgriz.self.appexercise1202.module.home.model.GetStatusModel;
 
 public class UsingRecyclerViewFragment extends Fragment {
 

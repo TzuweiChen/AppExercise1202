@@ -1,4 +1,4 @@
-package razgriz.self.appexercise1202.module.user.activity;
+package razgriz.self.appexercise1202.module.home.activity;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import razgriz.self.appexercise1202.R;
-import razgriz.self.appexercise1202.module.user.fragment.UsingRecyclerViewFragment;
+import razgriz.self.appexercise1202.module.home.fragment.UsingRecyclerViewFragment;
 
 public class UsingRecyclerViewActivity extends AppCompatActivity {
 

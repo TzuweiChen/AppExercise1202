@@ -1,4 +1,4 @@
-package razgriz.self.appexercise1202.module.user.fragment;
+package razgriz.self.appexercise1202.module.home.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import razgriz.self.appexercise1202.R;
-import razgriz.self.appexercise1202.module.user.activity.UsingRecyclerViewActivity;
-import razgriz.self.appexercise1202.module.user.model.GetStatusModel;
+import razgriz.self.appexercise1202.module.home.activity.UsingRecyclerViewActivity;
+import razgriz.self.appexercise1202.module.home.model.GetStatusModel;
 
 public class HomeFragment extends Fragment {
 
