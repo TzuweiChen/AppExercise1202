@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -48,6 +50,11 @@ public class CommonHelper {
     public static boolean isPassTypeDayPass(String passType) {
         // TODO: 2021/12/2 using enum
         return passType.equals(PASS_TYPE_DAY);
+    }
+
+    public static String getFormattedPrice(int price) {
+        NumberFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(price);
     }
 
 }

@@ -18,6 +18,7 @@ import java.util.List;
 
 import razgriz.self.appexercise1202.R;
 import razgriz.self.appexercise1202.bean.Pass;
+import razgriz.self.appexercise1202.helper.CommonHelper;
 import razgriz.self.appexercise1202.module.home.model.PassSectionAndTypeModel;
 
 public class PassAdapter extends RecyclerView.Adapter<PassAdapterViewHolder> {
@@ -81,7 +82,7 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapterViewHolder> {
                 }
 
                 passContentViewHolder.txtPassTitle.setText(pass.getType());
-                passContentViewHolder.txtPassPrice.setText(pass.getPrice());
+                passContentViewHolder.txtPassPrice.setText(CommonHelper.getFormattedPrice(pass.getPrice()));
                 passContentViewHolder.btnBuyPass.setOnClickListener(view -> {
                     if (callback != null) {
                         callback.onPassBuyClicked(pass);

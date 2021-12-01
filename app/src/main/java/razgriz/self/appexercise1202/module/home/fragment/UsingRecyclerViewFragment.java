@@ -22,6 +22,7 @@ import razgriz.self.appexercise1202.R;
 import razgriz.self.appexercise1202.bean.Pass;
 import razgriz.self.appexercise1202.helper.CommonHelper;
 import razgriz.self.appexercise1202.module.home.adapter.PassAdapter;
+import razgriz.self.appexercise1202.module.home.model.GetPassModel;
 import razgriz.self.appexercise1202.module.home.model.GetStatusModel;
 import razgriz.self.appexercise1202.module.home.model.PassSectionAndTypeModel;
 
@@ -34,10 +35,14 @@ public class UsingRecyclerViewFragment extends Fragment implements PassAdapter.P
     private RecyclerView recyclerView;
     private ProgressBar progress;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private GetStatusModel getStatusModel;
+    private GetPassModel getPassModel;
 
     private List<PassSectionAndTypeModel> sectionAndTypeModels;
     private PassAdapter adapter;
+
+    private boolean fetchingHour;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,10 +76,30 @@ public class UsingRecyclerViewFragment extends Fragment implements PassAdapter.P
         getStatusModel.getStatus().observe(getViewLifecycleOwner(), status -> {
             sectionAndTypeModels.add(new PassSectionAndTypeModel(PassSectionAndTypeModel.IPassAdapterType.STATUS_RESULT, String.format(Locale.getDefault(), "Status:%d\nMessage:%s", status.getStatus(), status.getMessage())));
 
-            // TODO: 2021/12/2 call API to fetch pass content, then show recycler view
-            sectionAndTypeModels.add(new PassSectionAndTypeModel(PassSectionAndTypeModel.IPassAdapterType.FOOTER));
-            adapter = new PassAdapter(sectionAndTypeModels, UsingRecyclerViewFragment.this);
-            recyclerView.setAdapter(adapter);
+            fetchingHour = false;
+            getPassModel.doGetPass(requireContext(), CommonHelper.PASS_TYPE_DAY);
+        });
+
+        getPassModel = new ViewModelProvider(this).get(GetPassModel.class);
+        getPassModel.getProgress().observe(getViewLifecycleOwner(), isProgress -> {
+            if (isProgress) {
+                Toast.makeText(requireContext(), R.string.msg_fetching_pass, Toast.LENGTH_SHORT).show();
+            }
+            progress.setVisibility(isProgress ? View.VISIBLE : View.GONE);
+        });
+        getPassModel.getError().observe(getViewLifecycleOwner(), error -> Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show());
+        getPassModel.getSections().observe(getViewLifecycleOwner(), sections -> {
+            //  sections is null should check in view model
+            sectionAndTypeModels.addAll(sections);
+
+            if (fetchingHour) {
+                sectionAndTypeModels.add(new PassSectionAndTypeModel(PassSectionAndTypeModel.IPassAdapterType.FOOTER));
+                adapter = new PassAdapter(sectionAndTypeModels, UsingRecyclerViewFragment.this);
+                recyclerView.setAdapter(adapter);
+            } else {
+                fetchingHour = true;
+                getPassModel.doGetPass(requireContext(), CommonHelper.PASS_TYPE_HOUR);
+            }
         });
 
         getStatusModel.doGetStatus();

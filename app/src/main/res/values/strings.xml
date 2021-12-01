@@ -8,6 +8,7 @@
     <string name="action_using_recycler_view">Intent to recycler view</string>
 
     <string name="msg_fetching_status">Fetching Status…</string>
+    <string name="msg_fetching_pass">Fetching Pass…</string>
     <string name="msg_pass_activated">Pass Activated, expired at:\n%s</string>
 
     <string name="txt_day_pass">DAY PASS</string>
