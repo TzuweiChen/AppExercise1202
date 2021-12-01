@@ -2,4 +2,21 @@
     <string name="app_name">AppExercise1202</string>
 
     <string name="action_get_status">Get Status</string>
+    <string name="action_buy">BUY</string>
+
+    <string name="msg_fetching_status">Fetching Status…</string>
+
+    <string name="txt_day_pass">DAY PASS</string>
+    <string name="txt_day_pass_1_title">1 DAY PASS</string>
+    <string name="txt_day_pass_1_price">Rp 2.000</string>
+    <string name="txt_day_pass_3_title">3 DAY PASS</string>
+    <string name="txt_day_pass_3_price">Rp 5.000</string>
+    <string name="txt_day_pass_7_title">7 DAY PASS</string>
+    <string name="txt_day_pass_7_price">Rp 10.000</string>
+
+    <string name="txt_hour_pass">HOUR PASS</string>
+    <string name="txt_hour_pass_1_title">1 HOUR PASS</string>
+    <string name="txt_hour_pass_1_price">Rp 500</string>
+    <string name="txt_hour_pass_8_title">8 HOUR PASS</string>
+    <string name="txt_hour_pass_8_price">Rp 1.000</string>
 </resources>

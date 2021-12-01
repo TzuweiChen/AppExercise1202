@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +25,6 @@ public class HomeFragment extends Fragment {
         return new HomeFragment();
     }
 
-    private Button btnGetStatus;
     private TextView txtResult;
     private ProgressBar progress;
 
@@ -42,7 +40,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         progress = view.findViewById(R.id.progress);
-        btnGetStatus = view.findViewById(R.id.btnGetStatus);
         txtResult = view.findViewById(R.id.txtResult);
         return view;
     }
@@ -51,11 +48,16 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnGetStatus.setOnClickListener(view1 -> getStatusModel.doGetStatus());
-
         getStatusModel = new ViewModelProvider(this).get(GetStatusModel.class);
-        getStatusModel.getProgress().observe(getViewLifecycleOwner(), isProgress -> progress.setVisibility(isProgress ? View.VISIBLE : View.GONE));
+        getStatusModel.getProgress().observe(getViewLifecycleOwner(), isProgress -> {
+            if (isProgress) {
+                Toast.makeText(requireContext(), R.string.msg_fetching_status, Toast.LENGTH_SHORT).show();
+            }
+            progress.setVisibility(isProgress ? View.VISIBLE : View.GONE);
+        });
         getStatusModel.getError().observe(getViewLifecycleOwner(), error -> Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show());
         getStatusModel.getStatus().observe(getViewLifecycleOwner(), status -> txtResult.setText(String.format(Locale.getDefault(), "Status:%d\nMessage:%s", status.getStatus(), status.getMessage())));
+
+        getStatusModel.doGetStatus();
     }
 }
