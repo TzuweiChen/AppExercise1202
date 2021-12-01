@@ -3,8 +3,11 @@
 
     <string name="action_get_status">Get Status</string>
     <string name="action_buy">BUY</string>
+    <string name="action_activated">Activated</string>
+    <string name="action_ok">OK</string>
 
     <string name="msg_fetching_status">Fetching Status…</string>
+    <string name="msg_pass_activated">Pass Activated, expired at:\n%s</string>
 
     <string name="txt_day_pass">DAY PASS</string>
     <string name="txt_day_pass_1_title">1 DAY PASS</string>
