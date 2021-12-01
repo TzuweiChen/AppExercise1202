@@ -59,26 +59,4 @@ public class UsingRecyclerViewFragment extends Fragment {
 
         getStatusModel.doGetStatus();
     }
-
-//    private void showActivatedDialog(boolean isDayPass, int offset) {
-//        Date expiredAt = new Date();
-//        if (isDayPass) {
-//            Calendar calendar = Calendar.getInstance();
-//            calendar.setTime(expiredAt);
-//            calendar.add(Calendar.DATE, offset);
-//            calendar.set(Calendar.HOUR, 0);
-//            calendar.set(Calendar.MINUTE, 0);
-//            calendar.set(Calendar.SECOND, 0);
-//            calendar.set(Calendar.MILLISECOND, 0);
-//            expiredAt = calendar.getTime();
-//        } else {
-//            expiredAt = new Date(expiredAt.getTime() + (long) offset * 60 * 60 * 1000);
-//        }
-//
-//        new AlertDialog.Builder(requireContext())
-//                .setTitle(R.string.action_activated)
-//                .setMessage(getString(R.string.msg_pass_activated, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(expiredAt)))
-//                .setPositiveButton(R.string.action_ok, null)
-//                .show();
-//    }
 }

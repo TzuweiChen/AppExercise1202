@@ -1,6 +1,5 @@
 package razgriz.self.appexercise1202.module.home.fragment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,12 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import razgriz.self.appexercise1202.R;
+import razgriz.self.appexercise1202.helper.CommonHelper;
 import razgriz.self.appexercise1202.module.home.activity.UsingRecyclerViewActivity;
 import razgriz.self.appexercise1202.module.home.model.GetStatusModel;
 
@@ -69,31 +66,31 @@ public class HomeFragment extends Fragment {
         btnBuyDayPass1.setOnClickListener(view1 -> {
             btnBuyDayPass1.setText(R.string.action_activated);
             btnBuyDayPass1.setEnabled(false);
-            showActivatedDialog(true, 1);
+            CommonHelper.showActivatedDialog(requireContext(), true, 1);
         });
 
         btnBuyDayPass3.setOnClickListener(view1 -> {
             btnBuyDayPass3.setText(R.string.action_activated);
             btnBuyDayPass3.setEnabled(false);
-            showActivatedDialog(true, 3);
+            CommonHelper.showActivatedDialog(requireContext(), true, 3);
         });
 
         btnBuyDayPass7.setOnClickListener(view1 -> {
             btnBuyDayPass7.setText(R.string.action_activated);
             btnBuyDayPass7.setEnabled(false);
-            showActivatedDialog(true, 7);
+            CommonHelper.showActivatedDialog(requireContext(), true, 7);
         });
 
         btnBuyHourPass1.setOnClickListener(view1 -> {
             btnBuyHourPass1.setText(R.string.action_activated);
             btnBuyHourPass1.setEnabled(false);
-            showActivatedDialog(false, 1);
+            CommonHelper.showActivatedDialog(requireContext(), false, 1);
         });
 
         btnBuyHourPass8.setOnClickListener(view1 -> {
             btnBuyHourPass8.setText(R.string.action_activated);
             btnBuyHourPass8.setEnabled(false);
-            showActivatedDialog(false, 8);
+            CommonHelper.showActivatedDialog(requireContext(), false, 8);
         });
 
         btnIntentToRecyclerView.setOnClickListener(view1 -> {
@@ -111,27 +108,5 @@ public class HomeFragment extends Fragment {
         getStatusModel.getStatus().observe(getViewLifecycleOwner(), status -> txtResult.setText(String.format(Locale.getDefault(), "Status:%d\nMessage:%s", status.getStatus(), status.getMessage())));
 
         getStatusModel.doGetStatus();
-    }
-
-    private void showActivatedDialog(boolean isDayPass, int offset) {
-        Date expiredAt = new Date();
-        if (isDayPass) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(expiredAt);
-            calendar.add(Calendar.DATE, offset);
-            calendar.set(Calendar.HOUR, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            expiredAt = calendar.getTime();
-        } else {
-            expiredAt = new Date(expiredAt.getTime() + (long) offset * 60 * 60 * 1000);
-        }
-
-        new AlertDialog.Builder(requireContext())
-                .setTitle(R.string.action_activated)
-                .setMessage(getString(R.string.msg_pass_activated, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(expiredAt)))
-                .setPositiveButton(R.string.action_ok, null)
-                .show();
     }
 }
