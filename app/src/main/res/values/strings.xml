@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppExercise1202</string>
+
+    <string name="action_get_status">Get Status</string>
 </resources>
