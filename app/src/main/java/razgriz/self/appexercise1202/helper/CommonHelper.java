@@ -41,4 +41,13 @@ public class CommonHelper {
                 .setPositiveButton(R.string.action_ok, null)
                 .show();
     }
+
+    public static final String PASS_TYPE_DAY = "day_pass";
+    public static final String PASS_TYPE_HOUR = "hour_pass";
+
+    public static boolean isPassTypeDayPass(String passType) {
+        // TODO: 2021/12/2 using enum
+        return passType.equals(PASS_TYPE_DAY);
+    }
+
 }
