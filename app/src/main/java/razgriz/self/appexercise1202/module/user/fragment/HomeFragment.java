@@ -1,6 +1,7 @@
 package razgriz.self.appexercise1202.module.user.fragment;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import razgriz.self.appexercise1202.R;
+import razgriz.self.appexercise1202.module.user.activity.UsingRecyclerViewActivity;
 import razgriz.self.appexercise1202.module.user.model.GetStatusModel;
 
 public class HomeFragment extends Fragment {
@@ -35,6 +37,7 @@ public class HomeFragment extends Fragment {
     private Button btnBuyDayPass7;
     private Button btnBuyHourPass1;
     private Button btnBuyHourPass8;
+    private Button btnIntentToRecyclerView;
     private ProgressBar progress;
 
     private GetStatusModel getStatusModel;
@@ -54,6 +57,7 @@ public class HomeFragment extends Fragment {
         btnBuyDayPass7 = view.findViewById(R.id.btnBuyDayPass7);
         btnBuyHourPass1 = view.findViewById(R.id.btnBuyHourPass1);
         btnBuyHourPass8 = view.findViewById(R.id.btnBuyHourPass8);
+        btnIntentToRecyclerView = view.findViewById(R.id.btnIntentToRecyclerView);
         txtResult = view.findViewById(R.id.txtResult);
         return view;
     }
@@ -90,6 +94,10 @@ public class HomeFragment extends Fragment {
             btnBuyHourPass8.setText(R.string.action_activated);
             btnBuyHourPass8.setEnabled(false);
             showActivatedDialog(false, 8);
+        });
+
+        btnIntentToRecyclerView.setOnClickListener(view1 -> {
+            requireActivity().startActivity(new Intent(requireContext(), UsingRecyclerViewActivity.class));
         });
 
         getStatusModel = new ViewModelProvider(this).get(GetStatusModel.class);

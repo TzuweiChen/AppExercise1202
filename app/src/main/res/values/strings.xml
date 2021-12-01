@@ -5,6 +5,7 @@
     <string name="action_buy">BUY</string>
     <string name="action_activated">Activated</string>
     <string name="action_ok">OK</string>
+    <string name="action_using_recycler_view">Intent to recycler view</string>
 
     <string name="msg_fetching_status">Fetching Status…</string>
     <string name="msg_pass_activated">Pass Activated, expired at:\n%s</string>
