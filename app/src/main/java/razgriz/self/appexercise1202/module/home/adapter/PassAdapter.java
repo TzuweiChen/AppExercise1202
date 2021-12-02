@@ -124,7 +124,7 @@ class PassAdapterViewHolder extends RecyclerView.ViewHolder {
 
 class GetResultViewHolder extends PassAdapterViewHolder {
 
-    TextView txtResult;
+    final TextView txtResult;
 
     GetResultViewHolder(View itemView) {
         super(itemView);
@@ -135,7 +135,7 @@ class GetResultViewHolder extends PassAdapterViewHolder {
 
 class PassTypeTitleViewHolder extends PassAdapterViewHolder {
 
-    TextView txtPassType;
+    final TextView txtPassType;
 
     PassTypeTitleViewHolder(View itemView) {
         super(itemView);
@@ -146,9 +146,9 @@ class PassTypeTitleViewHolder extends PassAdapterViewHolder {
 
 class PassContentViewHolder extends PassAdapterViewHolder {
 
-    TextView txtPassTitle;
-    TextView txtPassPrice;
-    Button btnBuyPass;
+    final TextView txtPassTitle;
+    final TextView txtPassPrice;
+    final Button btnBuyPass;
 
     PassContentViewHolder(View itemView) {
         super(itemView);

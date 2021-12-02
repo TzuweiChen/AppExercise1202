@@ -16,7 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 abstract class BaseRtf<T> {
-    protected T api;
+    protected final T api;
 
     BaseRtf(Context context) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();

@@ -7,16 +7,16 @@ import java.io.Serializable;
 public class Pass implements Serializable {
 
     @SerializedName("type")
-    private String type;
+    private final String type;
 
     @SerializedName("duration")
-    private int duration;
+    private final int duration;
 
     @SerializedName("price")
-    private int price;
+    private final int price;
 
     @SerializedName("price-unit")
-    private String priceUnit;
+    private final String priceUnit;
 
     @SerializedName("isActivated")
     private boolean isActivated;

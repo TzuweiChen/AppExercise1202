@@ -37,6 +37,7 @@ public class HomeFragment extends Fragment {
     private Button btnIntentToRecyclerView;
     private ProgressBar progress;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private GetStatusModel getStatusModel;
 
     @Override
@@ -93,9 +94,7 @@ public class HomeFragment extends Fragment {
             CommonHelper.showActivatedDialog(requireContext(), false, 8);
         });
 
-        btnIntentToRecyclerView.setOnClickListener(view1 -> {
-            requireActivity().startActivity(new Intent(requireContext(), UsingRecyclerViewActivity.class));
-        });
+        btnIntentToRecyclerView.setOnClickListener(view1 -> requireActivity().startActivity(new Intent(requireContext(), UsingRecyclerViewActivity.class)));
 
         getStatusModel = new ViewModelProvider(this).get(GetStatusModel.class);
         getStatusModel.getProgress().observe(getViewLifecycleOwner(), isProgress -> {

@@ -11,10 +11,10 @@ public abstract class DataTask<T> {
             String s = this.load();
             this.onResult(parseData(s));
         } catch (ApiException e) {
-            Logger.e(e, e.getMessage());
+            Logger.e(e, e.getMessage() == null ? "" : e.getMessage());
             this.onApiException(e);
         } catch (Exception e) {
-            Logger.e(e, e.getMessage());
+            Logger.e(e, e.getMessage() == null ? "" : e.getMessage());
             this.onException(e);
         } finally {
             this.onFinish();
