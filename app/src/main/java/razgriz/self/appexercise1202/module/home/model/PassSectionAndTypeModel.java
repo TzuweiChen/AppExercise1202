@@ -11,7 +11,7 @@ public class PassSectionAndTypeModel {
         int FOOTER = 4;
     }
 
-    private int type;
+    private final int type;
     private String content;
     private Pass pass;
 
