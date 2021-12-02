@@ -94,7 +94,7 @@ public class UsingRecyclerViewFragment extends Fragment implements PassAdapter.P
 
             if (fetchingHour) {
                 sectionAndTypeModels.add(new PassSectionAndTypeModel(PassSectionAndTypeModel.IPassAdapterType.FOOTER));
-                adapter = new PassAdapter(sectionAndTypeModels, UsingRecyclerViewFragment.this);
+                adapter = new PassAdapter(requireContext(), sectionAndTypeModels, UsingRecyclerViewFragment.this);
                 recyclerView.setAdapter(adapter);
             } else {
                 fetchingHour = true;
@@ -106,7 +106,9 @@ public class UsingRecyclerViewFragment extends Fragment implements PassAdapter.P
     }
 
     @Override
-    public void onPassBuyClicked(Pass pass) {
+    public void onPassBuyClicked(int sectionPosition, Pass pass) {
+        // should call API to buy pass then update data in recycler view
         CommonHelper.showActivatedDialog(requireContext(), CommonHelper.isPassTypeDayPass(pass.getType()), pass.getDuration());
+        adapter.updatePassActivateStatus(sectionPosition, true);
     }
 }

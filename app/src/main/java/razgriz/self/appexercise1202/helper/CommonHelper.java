@@ -52,9 +52,9 @@ public class CommonHelper {
         return passType.equals(PASS_TYPE_DAY);
     }
 
-    public static String getFormattedPrice(int price) {
-        NumberFormat formatter = new DecimalFormat("#,###");
-        return formatter.format(price);
+    public static String getFormattedPrice(int price, String unit) {
+        NumberFormat formatter = new DecimalFormat(" #,###");
+        return unit + formatter.format(price);
     }
 
 }

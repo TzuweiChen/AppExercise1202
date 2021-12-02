@@ -5,6 +5,7 @@ import static razgriz.self.appexercise1202.module.home.model.PassSectionAndTypeM
 import static razgriz.self.appexercise1202.module.home.model.PassSectionAndTypeModel.IPassAdapterType.PASS_TYPE_TITLE;
 import static razgriz.self.appexercise1202.module.home.model.PassSectionAndTypeModel.IPassAdapterType.STATUS_RESULT;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +25,15 @@ import razgriz.self.appexercise1202.module.home.model.PassSectionAndTypeModel;
 public class PassAdapter extends RecyclerView.Adapter<PassAdapterViewHolder> {
 
     public interface PassClickCallback {
-        void onPassBuyClicked(Pass pass);
+        void onPassBuyClicked(int sectionPosition, Pass pass);
     }
 
+    private final Context context;
     private final List<PassSectionAndTypeModel> sectionAndTypeModels;
     private final PassClickCallback callback;
 
-    public PassAdapter(List<PassSectionAndTypeModel> sectionAndTypeModels, PassClickCallback callback) {
+    public PassAdapter(Context context, List<PassSectionAndTypeModel> sectionAndTypeModels, PassClickCallback callback) {
+        this.context = context;
         this.sectionAndTypeModels = sectionAndTypeModels;
         this.callback = callback;
     }
@@ -81,11 +84,13 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapterViewHolder> {
                     return;
                 }
 
-                passContentViewHolder.txtPassTitle.setText(pass.getType());
-                passContentViewHolder.txtPassPrice.setText(CommonHelper.getFormattedPrice(pass.getPrice()));
+                passContentViewHolder.txtPassTitle.setText(context.getString(CommonHelper.isPassTypeDayPass(pass.getType()) ? R.string.txt_day_pass_title : R.string.txt_hour_pass_title, pass.getDuration()));
+                passContentViewHolder.txtPassPrice.setText(CommonHelper.getFormattedPrice(pass.getPrice(), pass.getPriceUnit()));
+                passContentViewHolder.btnBuyPass.setText(pass.isActivated() ? R.string.action_activated : R.string.action_buy);
+                passContentViewHolder.btnBuyPass.setEnabled(!pass.isActivated());
                 passContentViewHolder.btnBuyPass.setOnClickListener(view -> {
                     if (callback != null) {
-                        callback.onPassBuyClicked(pass);
+                        callback.onPassBuyClicked(position, pass);
                     }
                 });
                 break;
@@ -100,6 +105,12 @@ public class PassAdapter extends RecyclerView.Adapter<PassAdapterViewHolder> {
     @Override
     public int getItemCount() {
         return sectionAndTypeModels.size();
+    }
+
+
+    public void updatePassActivateStatus(int position, boolean isActivated) {
+        sectionAndTypeModels.get(position).getPass().setActivated(isActivated);
+        notifyItemChanged(position);
     }
 
 }
